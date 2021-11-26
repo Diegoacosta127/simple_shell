@@ -11,13 +11,9 @@ int main (void)
 	size_t a;
 
 	*input = NULL;
-	a = 0;
 	split(input);
 	printf("2. command line to av\n");
-	while (input[a])
-	{
-		printf("%s\n", *(input + a + 1));
-		a++;
-	}
+	for(a = 0; *(input + a); a++)
+		printf("token is: %s\n", *(input + a));
 	return (0);
 }
