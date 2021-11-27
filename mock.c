@@ -13,6 +13,7 @@ int main(void)
 	size_t aux = 0;
 	char *txt = NULL;
 
+	printf("$ ");
 	getline(&txt, &aux, stdin);
 	txt[strlen(txt) - 1] = '\0';
 	buff =	split(txt);
