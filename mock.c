@@ -7,14 +7,17 @@
   */
 int main (void)
 {
-	char *input[1024];
-	size_t a;
+	char **buff;
+	int a = 0;
+	size_t aux = 0;
+	char *txt = NULL;
 
-	*input = NULL;
-	split(input);
-	printf("2. command line to av\n");
-	for (a = 0; *(input + a); a++)
-		printf("token is: %s\n", *(input + a));
+	getline(&txt, &aux, stdin);
+	buff =	split(txt);
+	for (a = 0; *(buff + a); a++)
+		printf("token is: %s\n", *(buff + a));
 
+	free(buff);
+	free(txt);
 	return (0);
 }

@@ -2,19 +2,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-void split(char *input[])
+char **split(char input[])
 {
-	char *buf = 0, *tok;
-	size_t buffsize, i;
+	char **result = malloc(*input);
+	char *tok;
+	int i = 0;
 
-	buffsize = 1024;
-	i = 0;
-	getline(&buf, &buffsize, stdin);
-	tok = strtok(buf, " ");
+	tok = strtok(input, " ");
 	while (tok)
 	{
-		input[i] = tok;
+		result[i] = tok;
 		tok = strtok(NULL, " ");
 		i++;
 	}
+	return (result);
 }

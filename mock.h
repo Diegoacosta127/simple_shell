@@ -1,1 +1,1 @@
-void split (char **);
+char **split (char *);
