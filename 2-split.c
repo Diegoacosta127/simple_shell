@@ -9,10 +9,12 @@ char **split(char input[])
 	int i = 0;
 
 	tok = strtok(input, " ");
-	while (tok)
+	while (*tok != '\0' && *tok != '\n')
 	{
 		result[i] = tok;
 		tok = strtok(NULL, " ");
+		if (tok == NULL)
+			break;
 		i++;
 	}
 	return (result);
