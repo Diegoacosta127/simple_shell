@@ -1,7 +1,12 @@
+#include "main.h"
 #include <stdio.h>
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+/**
+  * fork_wait - executes the command 'ls -l /tmp' in 5 child processes
+  * Return: void
+  */
 void fork_wait(void)
 {
 	pid_t my_pid;
@@ -26,7 +31,7 @@ void fork_wait(void)
 		{
 			wait(&aux);
 			printf("--------------------------uwu------------------------\n");
-			// write(1, "-------------------------------------------------\n", 50);
+			/* write(1, "-------------------------------------------------\n", 50);*/
 		}
 	}
 }

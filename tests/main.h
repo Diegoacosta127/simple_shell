@@ -1,5 +1,5 @@
 #ifndef HEADER_SHELL
-#define HEADER_SHEL
+#define HEADER_SHELL
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
