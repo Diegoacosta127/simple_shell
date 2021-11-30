@@ -36,11 +36,3 @@ char *_getenv(const char *name)
 	}
 	return ("Enviroment variable not found");
 }
-/**
- * if (need_len == count - 1)
- *		{
- * 			return (&haystack[index - (count - 1)]);
- *		}
- *
- * }
- */

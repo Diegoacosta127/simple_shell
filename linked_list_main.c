@@ -6,7 +6,7 @@ int main(void)
 	char **array = split(_getenv("PATH"), ":");
 	list_t *head = NULL;
 
-	for (i = 1; array[i]; i++)
+	for (i = 0; array[i]; i++)
 	{
 		add_node_end(&head, array[i]);
 	}
