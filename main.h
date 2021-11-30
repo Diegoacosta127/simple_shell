@@ -6,6 +6,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 void fork_wait(void);
-char **split(char *);
+char **split(char *, char *);
 extern char **environ;
+char *_getenv(const char *);
 #endif

@@ -42,7 +42,7 @@ int main(int argc, char **argv)
 			continue;
 		}
 		input[len - 1] = '\0';
-		token_list = split(input);
+		token_list = split(input, " ");
 		if (*token_list)
 		{
 			if (*token_list[0] == '?')

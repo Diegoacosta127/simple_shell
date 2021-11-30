@@ -2,10 +2,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-/**
-  * 
-  */
-char **split(char *input)
+
+char **split(char *input, char *delimiter)
 {
 	char **result;
 	char *tok = NULL;
@@ -15,11 +13,11 @@ char **split(char *input)
 	if (result == NULL)
 		exit(-1);
 
-	tok = strtok(input, " ");
+	tok = strtok(input, delimiter);
 	while (tok)
 	{
 		result[i] = tok;
-		tok = strtok(NULL, " ");
+		tok = strtok(NULL, delimiter);
 		i++;
 	}
 	return (result);

@@ -1,16 +1,6 @@
 #include "main.h"
 #include <string.h>
-char *_getenv(char *);
-int main(int argc, char **argv)
-{
-	char *aux;
-
-	aux = _getenv(argv[1]);
-	printf("%s\n", aux);
-	(void)argc;
-return (0);
-}
-char *_getenv(char *name)
+char *_getenv(const char *name)
 {
 	int index_X = 0;
 	int index_Y = 0;
