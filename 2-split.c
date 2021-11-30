@@ -8,10 +8,7 @@ char **split(char *input)
 	char *tok = NULL;
 	int i = 0;
 
-	if (input == NULL)
-		exit(-1);
-
-	result = calloc(strlen(input), sizeof(char *));
+	result = calloc(strlen(input) + 1, sizeof(char *));
 	if (result == NULL)
 		exit(-1);
 
