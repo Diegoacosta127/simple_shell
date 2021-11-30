@@ -7,4 +7,5 @@
 #include <sys/wait.h>
 void fork_wait(void);
 char **split(char *);
+extern char **environ;
 #endif
