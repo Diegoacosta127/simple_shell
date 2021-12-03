@@ -1,5 +1,6 @@
 #include "main.h"
 #include <string.h>
+#include <sys/stat.h>
 /**
  * shell_reset - a function that frees and set to NULL variables
  *@input: variable
@@ -18,31 +19,40 @@ void shell_reset(char **input, char ***token_list)
  * @argv: array of string value of the arguments
  * Return: 0 on succes
  */
-int main(int argc, char **argv)
+int main(int argc, char **argv, char **env)
 {
-	size_t len;
-	int i;
+	struct stat statbuff;
+	size_t len = 0, aux = 0;
 	char *input = NULL;
-	size_t aux = 0;
 	char **token_list = NULL;
-	int on_off = 1;
+	int on_off = 1, status = 0, my_pid = 0;
 	(void)argc;
 	(void)argv;
-
 	while (on_off)
 	{
-		write(1, "#cisfun($) ", 11);
-		len = getline(&input, &aux, stdin);
+		if (isatty(STDIN_FILENO))
+			write(1, "#cisfun($) ", 11);
+		else
+			on_off = 0;
 
-		if (len == 1)
+		len = getline(&input, &aux, stdin);
+		if (len == -1)
+		{
+			free(input);
+			break;
+		}
+		if (len	== 1)
 		{
 			free(input);
 			token_list = NULL;
 			input = NULL;
 			continue;
 		}
-		input[len - 1] = '\0';
+		if (input[len - 1] == '\n')
+			input[len - 1] = '\0';
+
 		token_list = split(input, " ");
+
 		if (*token_list)
 		{
 			if (*token_list[0] == '?')
@@ -50,14 +60,20 @@ int main(int argc, char **argv)
 				shell_reset(&input, &token_list);
 				exit(0);
 			}
-
-			for (i = 0; token_list[i]; i++)
+			if (stat(token_list[0], &statbuff) == -1)
 			{
-				printf("%s \n", token_list[i]);
+				perror("file not found");
+				shell_reset(&input, &token_list);
+					continue;
 			}
-		}
 
-		shell_reset(&input, &token_list);
+			my_pid = fork();
+			if (my_pid == 0)
+				execve(token_list[0], token_list, env);
+
+			wait(&status);
+			shell_reset(&input, &token_list);
+		}
 	}
 	return (0);
 }

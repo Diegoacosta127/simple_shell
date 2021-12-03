@@ -28,11 +28,11 @@ char *_getenv(const char *name)
 				break;
 			}
 			if (count == strlen(name))
-				return (environ[index_X]);
+				return (environ[index_X] + strlen(name) + 1);
 
 		}
 
 
 	}
-	return ("Enviroment variable not found");
+	return (NULL);
 }
