@@ -14,10 +14,14 @@ int main(int argc, char **argv, char **env)
 	char *input = NULL;
 	char **token_list = NULL;
 	int on_off = 1, status = 0, my_pid = 0;
+	char *path;
+	char *tmp = NULL;
+	list_t *head = NULL;
 	(void)argc;
 	(void)argv;
 	while (on_off)
 	{
+		path = _getenv("PATH");
 		if (isatty(STDIN_FILENO))
 			write(1, "#cisfun($) ", 11);
 		else
@@ -52,9 +56,11 @@ int main(int argc, char **argv, char **env)
 
 		if (strncmp(token_list[0], "./", 2) != 0 && strncmp(token_list[0], "../", 3) != 0 && strncmp(token_list[0], "/", 1) != 0)
 		{
-			shell_reset(&input, &token_list);
-			printf("aca entraria en el path\n");
-			return (0);
+			get_path(strdup(path), &head);
+			tmp = findpath("ls", head);
+			token_list[0] = tmp;
+			free_list(head);
+			free(tmp);
 		}
 
 		if (stat(token_list[0], &statbuff) == -1)
@@ -69,8 +75,8 @@ int main(int argc, char **argv, char **env)
 			execve(token_list[0], token_list, env);
 
 		wait(&status);
-		perror("unu");
 		shell_reset(&input, &token_list);
+		free(path);
 	}
 	return (0);
 }
