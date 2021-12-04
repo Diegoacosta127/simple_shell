@@ -9,12 +9,10 @@
 #include <sys/stat.h>
 void fork_wait(void);
 char **split(char *, char *);
-extern char **environ;
-char *_getenv(const char *);
+char *_getenv(const char *, char **);
 void shell_reset(char **input, char ***token_list);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 int _strncmp(const char *s1, const char *s2, size_t n);
-char *_getenv(const char *name);
 typedef struct path_t
 {
 char *str;
@@ -23,7 +21,7 @@ struct path_t *next;
 
 } list_t;
 list_t *add_node_end(list_t **head, char *str, int n);
-list_t *get_path(char *str, list_t **head);
+void get_path(char *str, list_t **head);
 char *findpath(char *str, list_t *path);
 size_t print_list(list_t *h);
 void free_list(list_t *head);

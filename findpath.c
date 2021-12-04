@@ -1,12 +1,13 @@
 #include "main.h"
 char *findpath(char *str, list_t *path)
 {
-	char *buff;
+	char *buff = NULL;
 	struct stat status;
 
 	for	(; path != NULL;)
 	{
 		buff = malloc(sizeof(char) * (strlen(str) + path->len + 2));
+		buff = memset(buff, '\0', (sizeof(char) * (strlen(str) + path->len + 2)));
 		if (!buff)
 			return (0);
 
@@ -20,5 +21,6 @@ char *findpath(char *str, list_t *path)
 		free(buff);
 		path = path->next;
 	}
+	free(buff);
 	return (NULL);
 }

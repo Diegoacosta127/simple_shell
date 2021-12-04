@@ -1,6 +1,6 @@
 #include "main.h"
 #include <string.h>
-char *_getenv(const char *name)
+char *_getenv(const char *name, char **environ)
 {
 	int index_X = 0;
 	int index_Y = 0;
