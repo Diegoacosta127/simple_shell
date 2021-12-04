@@ -1,4 +1,3 @@
-#include "linked_list.h"
 #include "main.h"
 /**
  * print_list - a function that prints all the elements of a list_t list.
@@ -12,13 +11,13 @@ size_t print_list(list_t *h)
 	while (h)
 	{
 
-	if (h->dir == NULL)
+	if (h->str == NULL)
 	{	printf("[0] (nil)\n");
 		node_count++;
 	}
 	else
 	{
-		printf("%s\n", h->dir);
+		printf("%s\n", h->str);
 		node_count++;
 	}
 
