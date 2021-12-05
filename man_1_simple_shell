@@ -1,0 +1,57 @@
+.TH hsh 1 "December 9th, 2021" "Simple Shell" "hsh General Commands Manual"
+
+.SH NAME
+.B
+hsh
+- a simple version of the GNU command line interpreter
+
+.SH SYNOPSIS
+.B #cisfun($)
+.RB {| COMMAND |}
+.RB [| OPTIONS |]
+.RB [| ARGUMENTS |]
+
+.SH DESCRIPTION
+.B hsh
+shows a
+.I prompt line
+and waits for the user to write a command and executes it. In
+.I interactive mode
+this process repeats until the user writes the command
+.I 'exit'
+. In the
+.I non-interactive mode
+the command entered is executed once, then the whole process stops and the
+.I prompt line
+doesn't appear again.
+
+.SH COMMAND
+Any of the UNIX commands or any other that executes a command.
+
+.SH OPTIONS
+Options vary depending on the
+.I COMMAND
+entered.
+
+.SH ARGUMENTS
+As
+.I OPTIONS,
+.I ARGUMENTS
+will depend on the option entered.
+
+.SH EXAMPLES
+In interactive mode:
+.B ./hsh
+.br
+in non-interactive mode:
+.B echo "ls -la /tmp" | ./hsh
+
+.SH RETURN VALUE
+0 if success, otherwise the exit value
+
+.SH CREDITS
+.B Diego Acosta
+| diegoacosta127@gmail.com | https://github.com/Diegoacosta127
+.br
+.B Ignacio Castellán García
+| ignacioacgarcia@gmail.com | https://github.com/Ignacio-C-Garcia
