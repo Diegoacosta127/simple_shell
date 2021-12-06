@@ -1,6 +1,7 @@
 #include "main.h"
 int prompt(int *on_off, char **input, size_t *aux, ssize_t *len, char ***token_list)
 {
+
 	if (isatty(STDIN_FILENO))
 		write(1, "#cisfun($) ", 11);
 	else
@@ -9,7 +10,7 @@ int prompt(int *on_off, char **input, size_t *aux, ssize_t *len, char ***token_l
 	*len = getline(input, aux, stdin);
 	if (*len == -1)
 	{
-		free(input);
+		free(*input);
 		return (-1);
 	}
 	if (*len == 1)
@@ -19,8 +20,8 @@ int prompt(int *on_off, char **input, size_t *aux, ssize_t *len, char ***token_l
 		return (1);
 	}
 
-	if (*input[*len - 1] == '\n')
-		*input[*len - 1] = '\0';
+	if (*(*input + *len - 1) == '\n')
+		*(*input + *len - 1) = '\0';
 
 	*token_list = split(*input, " ");
 	if (*token_list == NULL)
@@ -60,7 +61,7 @@ int main(int argc, char **argv, char **env)
 		{
 			var_reset(1, &input);
 			free(token_list);
-			token_list = NULL;
+			execve(token_list[0], token_list, env);
 			exit(0);
 		}
 
