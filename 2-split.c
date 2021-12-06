@@ -14,6 +14,11 @@ char **split(char *input, char *delimiter)
 		exit(-1);
 
 	tok = strtok(input, delimiter);
+	if (!tok)
+	{
+		free(result);
+		result = NULL;
+	}
 	while (tok)
 	{
 		result[i] = tok;
