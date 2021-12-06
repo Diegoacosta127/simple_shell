@@ -8,6 +8,7 @@
 #include <string.h>
 #include <sys/stat.h>
 #include <stdarg.h>
+void _exit(int x);
 void fork_wait(void);
 char **split(char *, char *);
 char *_getenv(const char *, char **);
@@ -26,4 +27,7 @@ void get_path(char *str, list_t **head);
 char *findpath(char *str, list_t *path);
 size_t print_list(list_t *h);
 void free_list(list_t *head);
+void searchfile(char ***token_list);
+int built_in(char **token_list);
+char *holamanola(char **token_list, char **path, char **env, list_t **head);
 #endif
