@@ -1,24 +1,47 @@
 #include "main.h"
-int prompt(int *on_off, char **input, size_t *aux, ssize_t *len)
+int prompt(int *on_off, char **input, char ***token_list)
 {
+	size_t aux = 0;
+	ssize_t len = 0;
+
 	if (isatty(STDIN_FILENO))
 		write(1, "#cisfun($) ", 11);
 	else
 		*on_off = 0;
 
-	*len = getline(input, aux, stdin);
-	if (*len == -1)
-	{
-		free(input);
-		return (-1);
-	}
-	if (*len == 1)
+	len = getline(input, &aux, stdin);
+	if (len == -1)
 	{
 		free(*input);
-		*input = NULL;
+		return (-1);
+	}
+	if (len == 1)
+	{
+		var_reset(1, input);
+		return (1);
+	}
+
+	if (*(*input + len - 1) == '\n')
+		*(*input + len - 1) = '\0';
+
+	*token_list = split(*input, " ");
+	if (*token_list == NULL)
+	{
+		var_reset(1, input);
 		return (1);
 	}
 	return (0);
+}
+int filexist(char **token_list)
+{
+	struct stat statbuff;
+
+	if (stat(token_list[0], &statbuff) == -1)
+	{
+		perror("file not found");
+		return (0);
+	}
+	return (1);
 }
 /**
  * main - super simple shell
@@ -29,69 +52,41 @@ int prompt(int *on_off, char **input, size_t *aux, ssize_t *len)
  */
 int main(int argc, char **argv, char **env)
 {
-	struct stat statbuff;
-	ssize_t len = 0;
-	size_t aux = 0;
-	char *input = NULL;
-	char **token_list = NULL;
-	int on_off = 1, status = 0, my_pid = 0;
-	char *path = NULL;
-	char *tmp = NULL;
+	char *input = NULL, **token_list = NULL, *path = NULL, *tmp = NULL;
+	int on_off = 1, status = 0, my_pid = 0, prompt_st = 0, isbuiltin = 0;
 	list_t *head = NULL;
-	char *manola;
-	int prompt_st = 0;
 	(void)argc;
 	(void)argv;
 	while (on_off)
 	{
-		manola = _getenv("PATH", env);
-		path = strdup(manola);
-
-		prompt_st = prompt(&on_off, &input, &aux, &len);
+		prompt_st = prompt(&on_off, &input, &token_list);
 		if (prompt_st == -1)
 			break;
 		if (prompt_st == 1)
 			continue;
-
-		if (input[len - 1] == '\n')
-			input[len - 1] = '\0';
-
-		token_list = split(input, " ");
-		if (!token_list)
-			return (-1);
-
-
-		if (strncmp(token_list[0], "exit", 5) == 0)
+		isbuiltin = built_in(token_list);
+		if (isbuiltin == 1)
 		{
-			shell_reset(&input, &token_list);
-			free(path);
-			exit(0);
+			var_reset(1, &input);
+			free(token_list);
+			_exit(0);
 		}
 
-		if (strncmp(token_list[0], "./", 2) != 0 && strncmp(token_list[0], "../", 3) != 0 && strncmp(token_list[0], "/", 1) != 0)
+		tmp = holamanola(token_list, &path, env, &head);
+		token_list[0] = tmp;
+
+		if (filexist(token_list))
 		{
-			get_path(path, &head);
-			tmp = findpath(token_list[0], head);
-			token_list[0] = tmp;
+			my_pid = fork();
+			if (my_pid == 0)
+				execve(token_list[0], token_list, env);
+			wait(&status);
 		}
-
-		if (stat(token_list[0], &statbuff) == -1)
-		{
-			perror("file not found");
-			shell_reset(&input, &token_list);
-				continue;
-		}
-
-		my_pid = fork();
-		if (my_pid == 0)
-			execve(token_list[0], token_list, env);
-
-		wait(&status);
-		shell_reset(&input, &token_list);
+		free(token_list);
+		token_list = NULL;
 		free_list(head);
 		head = NULL;
-		free(path);
-		free(tmp);
+		var_reset(3, &path, &tmp, &input);
 	}
 	return (0);
 }

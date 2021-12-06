@@ -9,7 +9,6 @@
 #include <sys/stat.h>
 void fork_wait(void);
 char **split(char *, char *);
-extern char **environ;
 char *_getenv(const char *);
 int _strncmp(const char *s1, const char *s2, size_t n);
 char *_strcat(char *, char *);
