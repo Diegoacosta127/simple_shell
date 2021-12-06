@@ -7,11 +7,16 @@
 ## Context
 
 [![ubuntu](https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)](https://canonical.com/) **Ubuntu 20.04.3 LTS**
+
 ![Script Bash](https://img.shields.io/badge/Shell_Script-121011?style=for-the-badge&logo=gnu-bash&logoColor=white)
+
 [![C](https://img.shields.io/badge/Language-00599C?style=for-the-badge&logo=c&logoColor=white)](https://www.cprogramming.com/) **Compiler version: 9.3.0-17ubuntu~20.04**
+
 [![Vim](https://img.shields.io/badge/VIM_Text_Editor-%2311AB00.svg?&style=for-the-badge&logo=vim&logoColor=white)](https://www.vim.org)
+
 [![Betty](https://img.shields.io/badge/Code_Style-Betty-crimson)](https://github.com/holbertonschool/Betty) **Everybody loves Betty**
-![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com)
+
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com)
 
 ## Compilation
 
@@ -35,5 +40,5 @@ In the above example, it'll list with long format all the content from the direc
 - Diego M. Acosta C.
 [![followers-diego](https://img.shields.io/github/followers/diegoacosta127?style=social)](https://github.com/Diegoacosta127) [![Linkedin Diego](https://img.shields.io/badge/-Diego_Acosta-blue?style=plastic&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/diegoacosta127/)](https://www.linkedin.com/in/diegoacosta127/)
 - Ignacio Castellán García
-[![followers-nacho](https://img.shields.io/github/followers/Ignacio-C-Garcia?style=social)](https://github.com/Ignacio-C-Garcia) [![Linkedin Diego](https://img.shields.io/badge/-Ignacio_Castellán_García-blue?style=plastic&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/ignacio-castell%C3%A1n-garc%C3%ADa-265406201/)](https://https://www.linkedin.com/in/ignacio-castell%C3%A1n-garc%C3%ADa-265406201/)
+[![followers-nacho](https://img.shields.io/github/followers/Ignacio-C-Garcia?style=social)](https://github.com/Ignacio-C-Garcia) [![Linkedin Diego](https://img.shields.io/badge/-Ignacio_Castellán_García-blue?style=plastic&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/ignacio-ac-garcia)](https://www.linkedin.com/in/ignacio-ac-garcia)
 
