@@ -9,7 +9,7 @@ char *findpath(char *str, list_t *path)
 		buff = malloc(sizeof(char) * (strlen(str) + path->len + 2));
 		buff = memset(buff, '\0', (sizeof(char) * (strlen(str) + path->len + 2)));
 		if (!buff)
-			return (0);
+			exit(-1);
 
 		strcat(buff, path->str);
 		strcat(buff, "/");
@@ -21,6 +21,5 @@ char *findpath(char *str, list_t *path)
 		free(buff);
 		path = path->next;
 	}
-	free(buff);
-	return (NULL);
+	return (strdup(str));
 }

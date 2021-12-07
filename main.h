@@ -30,4 +30,6 @@ void free_list(list_t *head);
 void searchfile(char ***token_list);
 int built_in(char **token_list);
 char *holamanola(char **token_list, char **path, char **env, list_t **head);
+extern char **environ;
+void _env(void);
 #endif

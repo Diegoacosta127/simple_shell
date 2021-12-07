@@ -38,7 +38,7 @@ int filexist(char **token_list)
 
 	if (stat(token_list[0], &statbuff) == -1)
 	{
-		perror("file not found");
+		perror(token_list[0]);
 		return (0);
 	}
 	return (1);
@@ -52,7 +52,7 @@ int filexist(char **token_list)
  */
 int main(int argc, char **argv, char **env)
 {
-	char *input = NULL, **token_list = NULL, *path = NULL, *tmp = NULL;
+	char *input = NULL, **token_list = NULL, *path = NULL;
 	int on_off = 1, status = 0, my_pid = 0, prompt_st = 0, isbuiltin = 0;
 	list_t *head = NULL;
 	(void)argc;
@@ -67,26 +67,29 @@ int main(int argc, char **argv, char **env)
 		isbuiltin = built_in(token_list);
 		if (isbuiltin == 1)
 		{
-			var_reset(1, &input);
-			free(token_list);
+			var_reset(2, &input, &token_list);
 			_exit(0);
 		}
-
-		tmp = holamanola(token_list, &path, env, &head);
-		token_list[0] = tmp;
-
-		if (filexist(token_list))
+		if (isbuiltin == 2)
 		{
-			my_pid = fork();
-			if (my_pid == 0)
-				execve(token_list[0], token_list, env);
-			wait(&status);
+			_env();
+			var_reset(2, &input, &token_list);
+			continue;
 		}
-		free(token_list);
-		token_list = NULL;
+			token_list[0] = holamanola(token_list, &path, env, &head);
+
+			if (filexist(token_list))
+			{
+				my_pid = fork();
+				if (my_pid == 0)
+					execve(token_list[0], token_list, env);
+				wait(&status);
+			}
 		free_list(head);
 		head = NULL;
-		var_reset(3, &path, &tmp, &input);
+		var_reset(3, token_list, &path, &input);
+		free(token_list);
+		token_list = NULL;
 	}
 	return (0);
 }
