@@ -15,6 +15,12 @@ char *_getenv(const char *, char **);
 void var_reset(int numb, ...);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 int _strncmp(const char *s1, const char *s2, size_t n);
+/**
+  * struct path_t - node list for path
+  * @str: a token
+  * @len: a length
+  * @next: pointer to next
+  */
 typedef struct path_t
 {
 char *str;

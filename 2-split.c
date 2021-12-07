@@ -2,7 +2,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+/**
+  * split - splits a string into tokens
+  * @input: the string to be tokenized
+  * @delimiter: list of characters to tokenize the string
+  * Return: the list of tokens
+  */
 char **split(char *input, char *delimiter)
 {
 	char **result;

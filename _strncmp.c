@@ -1,4 +1,11 @@
 #include "main.h"
+/**
+  * _strncmp - compares a string to n bytes of another string
+  * @s1: string test
+  * @s2: string to look into
+  * @n: number of bytes
+  * Return: an integer
+  */
 int _strncmp(const char *s1, const char *s2, size_t n)
 {
 	size_t i = 0;
