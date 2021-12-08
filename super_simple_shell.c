@@ -56,6 +56,21 @@ int filexist(char **token_list)
 	return (1);
 }
 /**
+ * free_all - a function that frees and set to null pointers
+ * @head: header of linked list list_t
+ * @token_list: array of tokens
+ * @path: string path
+ * @input: buffer of getline
+ */
+void free_all(list_t **head, char ***token_list, char **path, char **input)
+{
+	free_list(*head);
+	*head = NULL;
+	var_reset(3, *token_list, path, input);
+	free(*token_list);
+	*token_list = NULL;
+}
+/**
  * main - super simple shell
  * @argc:number of arguments
  * @argv: array of string value of the arguments
@@ -67,6 +82,7 @@ int main(int argc, char **argv, char **env)
 	char *input = NULL, **token_list = NULL, *path = NULL;
 	int on_off = 1, status, my_pid = 0, prompt_st = 0, isbuiltin = 0;
 	list_t *head = NULL;
+	int rvalue = 0;
 	(void)argc;
 	(void)argv;
 	signal(SIGINT, SIG_IGN);
@@ -97,12 +113,10 @@ int main(int argc, char **argv, char **env)
 				if (my_pid == 0)
 					execve(token_list[0], token_list, env);
 				wait(&status);
+				if (WIFEXITED(status) != 0)
+					rvalue = WEXITSTATUS(status);
 			}
-		free_list(head);
-		head = NULL;
-		var_reset(3, token_list, &path, &input);
-		free(token_list);
-		token_list = NULL;
+		free_all(&head, &token_list, &path, &input);
 	}
-	return (status);
+	return (rvalue);
 }
