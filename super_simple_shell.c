@@ -103,5 +103,5 @@ int main(int argc, char **argv, char **env)
 		free(token_list);
 		token_list = NULL;
 	}
-	return (0);
+	return (status);
 }

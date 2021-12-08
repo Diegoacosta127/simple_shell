@@ -9,9 +9,13 @@ int main(void)
 	char **semic = NULL;
 	int x = 0;
 	int y = 0;
+	int z = 0;
 	int counter = 0;
 	char **result;
-	calloc(1024, 1);
+	char **preresult;
+	int index = 0;
+	int status;
+	int lastvar;
 
 	f = read(STDIN_FILENO, buff, f);
 	buff[f] = '\0';
@@ -22,22 +26,40 @@ int main(void)
 		semic = split(lines[y], ";");
 		for (x = 0; semic[x]; x++)
 		{
-			add_node_end(&header, semic[x], 0);
-			counter++;
-
+			preresult = split(semic[x], " ");
+			for (z = 0; preresult[z]; z++)
+			{
+				add_node_end(&header, preresult[z], index);
+				counter++;
+			}
+			index++;
 		}
 	}
 //	print_list(header);
-	result = malloc((counter + 1) * sizeof(char *));
-	for (counter = 0; header; counter++)
+	z = 0;
+	result = calloc((counter + 1), sizeof(char *));
+
+	for (; header;)
 	{
-		result[counter] = header->str;
-		header = header->next;
+		counter = 0;
+		while (header && header->len == z)
+		{
+			result[counter] = header->str;
+			header = header->next;
+			counter++;
+		}
+		result[counter] = '\0';
+		z++;
+
+		printf("%s\n", result[0]);
+		lastvar = fork();
+		if (lastvar == 0)
+		{
+			execve(result[0], result, NULL);
+		}
+		wait(&status);
+
 	}
 
-	for (counter = 0; result[counter]; counter++)
-	{
-		printf("%s\n", result[counter]);
-	}
-return (0);
+	return (0);
 }

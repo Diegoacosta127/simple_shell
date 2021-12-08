@@ -1,7 +1,2 @@
-hola
-juan
-carlos
-como
-estas
-chupa
-pija
+ls -la ; ls /tmp
+ls ; pwd ; env
