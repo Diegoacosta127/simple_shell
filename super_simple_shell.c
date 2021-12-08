@@ -70,6 +70,7 @@ int main(int argc, char **argv, char **env)
 	(void)argc;
 	(void)argv;
 	signal(SIGINT, SIG_IGN);
+	signal(SIGINT, INThandler);
 	while (on_off)
 	{
 		prompt_st = prompt(&on_off, &input, &token_list);
