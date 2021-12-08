@@ -1,65 +1,51 @@
 #include "main.h"
-
-int main(void)
+int main(int argc, char **argv, char **env)
 {
-	list_t *header = NULL;
-	char buff[1024];
-	size_t f = 1024;
-	char **lines = NULL;
-	char **semic = NULL;
-	int x = 0;
-	int y = 0;
-	int z = 0;
-	int counter = 0;
+	int z = 0, counter = 0, status, xxx, my_pid;
 	char **result;
-	char **preresult;
-	int index = 0;
-	int status;
-	int lastvar;
+	char *path = NULL, *freemanola, *buffdup = NULL;
+	list_t *head = NULL, *tmp = NULL, *header = NULL;
+	(void)argc;
+	(void)argv;
 
-	f = read(STDIN_FILENO, buff, f);
-	buff[f] = '\0';
-
-	lines = split(buff, "\n");
-	for (y = 0; lines[y]; y++)
+	for (z = 0 ; z <= counter;)
 	{
-		semic = split(lines[y], ";");
-		for (x = 0; semic[x]; x++)
-		{
-			preresult = split(semic[x], " ");
-			for (z = 0; preresult[z]; z++)
-			{
-				add_node_end(&header, preresult[z], index);
-				counter++;
-			}
-			index++;
-		}
-	}
-//	print_list(header);
-	z = 0;
-	result = calloc((counter + 1), sizeof(char *));
+		header = mklistarg(&counter, &buffdup);
+		tmp = header;
+		result = calloc((counter + 1), sizeof(char *));
 
-	for (; header;)
-	{
-		counter = 0;
+		xxx = 0;
 		while (header && header->len == z)
 		{
-			result[counter] = header->str;
+			result[xxx] = header->str;
 			header = header->next;
-			counter++;
+			xxx++;
 		}
-		result[counter] = '\0';
+		result[xxx] = NULL;
 		z++;
-
-		printf("%s\n", result[0]);
-		lastvar = fork();
-		if (lastvar == 0)
-		{
-			execve(result[0], result, NULL);
-		}
-		wait(&status);
-
+			freemanola = holamanola(result, &path, env, &head);
+			result[0] = freemanola;
+			if (1)//filexist(result)
+			{
+				my_pid = fork();
+				if (my_pid == 0)
+					execve(result[0], result, env);
+					wait(&status);
+			}
+				free(result);
+				result = NULL;
+				free(freemanola);
+				freemanola = NULL;
+				free_list(head);
+				head = NULL;
+				free(path);
+				path = NULL;
+				free(buffdup);
+				buffdup = NULL;
+				free_list(tmp);
+				tmp = NULL;
+				if (!header)
+					break;
 	}
-
 	return (0);
-}
+	}

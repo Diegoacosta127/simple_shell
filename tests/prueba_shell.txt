@@ -1,2 +1,3 @@
-ls -la ; ls /tmp
-ls ; pwd ; env
+pwd; pwd;pwd
+ls;ls;lsl
+ls -la

@@ -1,14 +1,20 @@
 #include "main.h"
+/**
+  * findpath - looks for a string int $PATH
+  * @str: string to search
+  * @path: list of directories
+  * Return: a string
+  */
 char *findpath(char *str, list_t *path)
 {
-	char *buff;
+	char *buff = NULL;
 	struct stat status;
 
 	for	(; path != NULL;)
 	{
-		buff = malloc(sizeof(char) * (strlen(str) + path->len + 2));
+		buff = calloc((strlen(str) + path->len + 2), sizeof(char));
 		if (!buff)
-			return (0);
+			exit(-1);
 
 		strcat(buff, path->str);
 		strcat(buff, "/");
@@ -20,5 +26,5 @@ char *findpath(char *str, list_t *path)
 		free(buff);
 		path = path->next;
 	}
-	return (NULL);
+	return (strdup(str));
 }

@@ -1,4 +1,3 @@
-#include "linked_list.h"
 #include "main.h"
 /**
  * free_list - free allocated memory of linked lists

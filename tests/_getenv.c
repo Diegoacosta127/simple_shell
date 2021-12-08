@@ -1,6 +1,12 @@
 #include "main.h"
 #include <string.h>
-char *_getenv(const char *name)
+/**
+  * _getenv - looks for enviroment variable
+  * @name: name of the variable
+  * @environ: a enviroment variable
+  * Return: a string, or NULL
+  */
+char *_getenv(const char *name, char **environ)
 {
 	int index_X = 0;
 	int index_Y = 0;
