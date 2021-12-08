@@ -4,7 +4,7 @@
   */
 void _env(void)
 {
-	int i;
+	int i = 0;
 
 	if (environ)
 		while (*(environ + i))

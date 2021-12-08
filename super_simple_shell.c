@@ -80,7 +80,7 @@ int main(int argc, char **argv, char **env)
 		if (isbuiltin == 1)
 		{
 			var_reset(2, &input, &token_list);
-			_exit(0);
+			__exit(0);
 		}
 		if (isbuiltin == 2)
 		{

@@ -8,7 +8,7 @@
 #include <string.h>
 #include <sys/stat.h>
 #include <stdarg.h>
-void _exit(int x);
+void __exit(int x);
 void fork_wait(void);
 char **split(char *, char *);
 char *_getenv(const char *, char **);

@@ -1,10 +1,10 @@
 #include "main.h"
 /**
-  * _exit - exit
+  * __exit - exit
   * @x: status of exit
   * Return: void
   */
-void _exit(int x)
+void __exit(int x)
 {
 	exit(x);
 }
