@@ -6,10 +6,11 @@
   */
 void INThandler(int sig)
 {
-	char  c;
+	char c;
+	char str[] = "\nYou hit Ctrl+C.\nDo you really want to quit? [y/n] ";
 
 	signal(sig, SIG_IGN);
-	printf("\nYou hit Ctrl+C.\nDo you really want to quit? [y/n] ");
+	write(1, str, sizeof(str));
 	c = getchar();
 	if (c == 'y' || c == 'Y')
 		exit(0);
