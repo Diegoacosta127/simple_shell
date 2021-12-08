@@ -96,12 +96,11 @@ int main(int argc, char **argv, char **env)
 					execve(token_list[0], token_list, env);
 				wait(&status);
 			}
-			(WIFEXITED(status)) ? (ret = WEXITSTATUS(status)) : (ret = 0);
 		free_list(head);
 		head = NULL;
 		var_reset(3, token_list, &path, &input);
 		free(token_list);
 		token_list = NULL;
 	}
-	return (ret);
+	return (0);
 }
