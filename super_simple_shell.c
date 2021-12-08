@@ -65,7 +65,7 @@ int filexist(char **token_list)
 int main(int argc, char **argv, char **env)
 {
 	char *input = NULL, **token_list = NULL, *path = NULL;
-	int on_off = 1, status, my_pid = 0, prompt_st = 0, isbuiltin = 0, ret;
+	int on_off = 1, status, my_pid = 0, prompt_st = 0, isbuiltin = 0;
 	list_t *head = NULL;
 	(void)argc;
 	(void)argv;
