@@ -1,4 +1,10 @@
 #include "main.h"
+/**
+  * findpath - looks for a string int $PATH
+  * @str: string to search
+  * @path: list of directories
+  * Return: a string
+  */
 char *findpath(char *str, list_t *path)
 {
 	char *buff = NULL;

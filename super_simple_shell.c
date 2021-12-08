@@ -1,4 +1,11 @@
 #include "main.h"
+/**
+  * prompt - shows the prompt line
+  * @on_off: checker for interactive and non-interactive mode
+  * @input: command entered
+  * @token_list: list of tokens
+  * Return: integer depending of mode
+  */
 int prompt(int *on_off, char **input, char ***token_list)
 {
 	size_t aux = 0;
@@ -32,6 +39,11 @@ int prompt(int *on_off, char **input, char ***token_list)
 	}
 	return (0);
 }
+/**
+  * filexist - checks existence
+  * @token_list: list of tokens
+  * Return: 1 if checks, 0 if doesn't
+  */
 int filexist(char **token_list)
 {
 	struct stat statbuff;
