@@ -69,6 +69,7 @@ int main(int argc, char **argv, char **env)
 	list_t *head = NULL;
 	(void)argc;
 	(void)argv;
+	signal(SIGINT, SIG_IGN);
 	while (on_off)
 	{
 		prompt_st = prompt(&on_off, &input, &token_list);
